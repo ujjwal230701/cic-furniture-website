@@ -4,7 +4,8 @@
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.0",
+    "@supabase/supabase-js": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
