@@ -1,18 +1,17 @@
 import { useState } from "react";
 
 const products = [
-  { id: 1, name: "Executive Office Chair", category: "Chairs & Seating", price: 12999, description: "Premium ergonomic chair with lumbar support and adjustable armrests.", emoji: "🪑" },
-  { id: 2, name: "Height-Adjustable Desk", category: "Desks & Tables", price: 24999, description: "Modern standing desk for a healthier and more productive work experience.", emoji: "🖥️" },
-  { id: 3, name: "Filing Cabinet", category: "Storage & Shelving", price: 8999, description: "3-drawer steel filing cabinet with lock for secure document storage.", emoji: "🗄️" },
-  { id: 4, name: "Conference Table", category: "Desks & Tables", price: 39999, description: "Seats up to 8 people. Perfect for boardrooms and meeting spaces.", emoji: "📋" },
-  { id: 5, name: "Bookshelf Unit", category: "Storage & Shelving", price: 9999, description: "5-tier solid wood bookshelf. Elegant, sturdy and space-saving.", emoji: "📚" },
-  { id: 6, name: "Visitor Chair", category: "Chairs & Seating", price: 5999, description: "Comfortable padded visitor chair. Available in multiple colours.", emoji: "💺" },
-  { id: 7, name: "Desk Organizer Set", category: "Accessories & Misc", price: 1499, description: "Keep your workspace tidy with this premium organizer set.", emoji: "🗂️" },
-  { id: 8, name: "Monitor Stand", category: "Accessories & Misc", price: 2499, description: "Adjustable monitor riser with storage space underneath.", emoji: "🖥️" },
+  { id: 1, name: "Executive Office Chair", category: "Chairs & Seating", price: 12999, description: "Ergonomic design with lumbar support, breathable mesh back and adjustable armrests.", emoji: "🪑" },
+  { id: 2, name: "Height-Adjustable Desk", category: "Desks & Tables", price: 24999, description: "Electric sit-stand desk with memory settings. Promotes healthier working posture.", emoji: "🖥️" },
+  { id: 3, name: "3-Drawer Filing Cabinet", category: "Storage & Shelving", price: 8999, description: "Steel construction with central lock. Smooth glide drawers for effortless access.", emoji: "🗄️" },
+  { id: 4, name: "Conference Table", category: "Desks & Tables", price: 39999, description: "Seats up to 8. Clean-lined design with cable management. Ideal for boardrooms.", emoji: "📋" },
+  { id: 5, name: "Modular Bookshelf", category: "Storage & Shelving", price: 9999, description: "5-tier solid wood unit. Versatile and space-efficient for any office setting.", emoji: "📚" },
+  { id: 6, name: "Visitor Chair", category: "Chairs & Seating", price: 5999, description: "Padded seat and back with chrome legs. Available in multiple upholstery options.", emoji: "💺" },
+  { id: 7, name: "Desk Organizer Set", category: "Accessories & Misc", price: 1499, description: "Premium organizer with pen holder, document tray and mobile stand.", emoji: "🗂️" },
+  { id: 8, name: "Monitor Riser", category: "Accessories & Misc", price: 2499, description: "Adjustable height riser with integrated storage shelf underneath.", emoji: "🖥️" },
 ];
 
 const categories = ["All", "Chairs & Seating", "Desks & Tables", "Storage & Shelving", "Accessories & Misc"];
-
 const formatPrice = (price) => `₹${price.toLocaleString("en-IN")}`;
 
 export default function CICFurniture() {
@@ -32,20 +31,25 @@ export default function CICFurniture() {
   ];
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", color: "#2d3748", background: "#fff" }}>
+    <div style={{ fontFamily: "'Segoe UI', system-ui, sans-serif", color: "#1a1a1a", background: "#fff", margin: 0 }}>
 
       {/* Navbar */}
-      <nav style={{ background: "#1a1a2e", color: "white", padding: "0 24px", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 12px rgba(0,0,0,0.3)" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64, flexWrap: "wrap", gap: 8 }}>
+      <nav style={{ background: "#fff", borderBottom: "1px solid #e8e8e8", padding: "0 40px", position: "sticky", top: 0, zIndex: 100 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 70 }}>
           <div onClick={() => nav("home")} style={{ cursor: "pointer" }}>
-            <div style={{ fontSize: 22, fontWeight: 800, color: "#f6c90e", letterSpacing: 1 }}>CIC FURNITURE</div>
-            <div style={{ fontSize: 10, opacity: 0.7, letterSpacing: 2 }}>QUALITY YOU CAN FEEL</div>
+            <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: 3, color: "#1a1a1a" }}>CIC</div>
+            <div style={{ fontSize: 9, letterSpacing: 4, color: "#888", marginTop: -2 }}>FURNITURE</div>
           </div>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 32 }}>
             {navItems.map(n => (
-              <button key={n.key} onClick={() => nav(n.key)} style={{ background: page === n.key ? "#f6c90e" : "transparent", color: page === n.key ? "#1a1a2e" : "white", border: "none", padding: "8px 14px", borderRadius: 6, cursor: "pointer", fontWeight: 600, fontSize: 13 }}>{n.label}</button>
+              <button key={n.key} onClick={() => nav(n.key)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, fontWeight: page === n.key ? 700 : 400, color: page === n.key ? "#1a1a1a" : "#666", letterSpacing: 1, borderBottom: page === n.key ? "2px solid #1a1a1a" : "2px solid transparent", paddingBottom: 4 }}>
+                {n.label.toUpperCase()}
+              </button>
             ))}
           </div>
+          <button onClick={() => nav("contact")} style={{ background: "#1a1a1a", color: "#fff", border: "none", padding: "10px 20px", fontSize: 12, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>
+            GET A QUOTE
+          </button>
         </div>
       </nav>
 
@@ -53,54 +57,66 @@ export default function CICFurniture() {
       {page === "home" && (
         <div>
           {/* Hero */}
-          <div style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)", color: "white", padding: "80px 24px", textAlign: "center" }}>
-            <div style={{ maxWidth: 700, margin: "0 auto" }}>
-              <div style={{ fontSize: 64, marginBottom: 16 }}>🪑</div>
-              <h1 style={{ fontSize: 38, fontWeight: 800, margin: "0 0 16px", lineHeight: 1.2 }}>
-                Apne Office Ko Banayein <span style={{ color: "#f6c90e" }}>Khaas</span>
-              </h1>
-              <p style={{ fontSize: 17, opacity: 0.85, margin: "0 0 10px", lineHeight: 1.6 }}>
-                Premium office furniture for modern Indian workspaces.
-              </p>
-              <p style={{ fontSize: 14, opacity: 0.65, margin: "0 0 32px" }}>
-                🇮🇳 Proudly serving customers across India
-              </p>
-              <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                <button onClick={() => nav("products")} style={{ background: "#f6c90e", color: "#1a1a2e", border: "none", padding: "14px 28px", borderRadius: 8, fontWeight: 800, fontSize: 16, cursor: "pointer" }}>
-                  Products देखें →
-                </button>
-                <button onClick={() => nav("contact")} style={{ background: "transparent", color: "white", border: "2px solid white", padding: "14px 28px", borderRadius: 8, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>
-                  हमसे बात करें
-                </button>
+          <div style={{ background: "#f5f5f0", minHeight: 560, display: "flex", alignItems: "center", padding: "80px 40px" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", width: "100%" }}>
+              <div>
+                <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 20 }}>PREMIUM OFFICE FURNITURE</div>
+                <h1 style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.1, margin: "0 0 24px", color: "#1a1a1a" }}>
+                  Designed for<br />the Modern<br />Workspace.
+                </h1>
+                <p style={{ fontSize: 16, color: "#555", lineHeight: 1.7, margin: "0 0 36px", maxWidth: 400 }}>
+                  Premium office furniture crafted for productivity, comfort, and lasting quality. Trusted by businesses across India.
+                </p>
+                <div style={{ display: "flex", gap: 12 }}>
+                  <button onClick={() => nav("products")} style={{ background: "#1a1a1a", color: "#fff", border: "none", padding: "14px 28px", fontSize: 13, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>
+                    EXPLORE COLLECTION
+                  </button>
+                  <button onClick={() => nav("contact")} style={{ background: "transparent", color: "#1a1a1a", border: "1px solid #1a1a1a", padding: "14px 28px", fontSize: 13, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>
+                    CONTACT US
+                  </button>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                {products.slice(0, 4).map(p => (
+                  <div key={p.id} style={{ background: "#fff", padding: 24, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", aspectRatio: "1", border: "1px solid #e8e8e8" }}>
+                    <div style={{ fontSize: 48, marginBottom: 8 }}>{p.emoji}</div>
+                    <div style={{ fontSize: 11, fontWeight: 600, textAlign: "center", color: "#333" }}>{p.name}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Trust Bar */}
-          <div style={{ background: "#f6c90e", padding: "14px 24px" }}>
-            <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap", fontSize: 13, fontWeight: 700, color: "#1a1a2e" }}>
-              {["✅ GST Invoice Available", "🚚 Pan-India Delivery", "🛠️ Free Installation", "📞 24/7 Customer Support"].map(t => (
-                <span key={t}>{t}</span>
+          {/* Trust Strip */}
+          <div style={{ borderBottom: "1px solid #e8e8e8", borderTop: "1px solid #e8e8e8", padding: "20px 40px" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+              {["GST Invoice Provided", "Pan-India Delivery", "Free Installation", "EMI Available", "After-Sales Support"].map(t => (
+                <div key={t} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, fontWeight: 600, letterSpacing: 1, color: "#444" }}>
+                  <div style={{ width: 6, height: 6, background: "#1a1a1a", borderRadius: "50%" }} />
+                  {t.toUpperCase()}
+                </div>
               ))}
             </div>
           </div>
 
           {/* Features */}
-          <div style={{ padding: "60px 24px", background: "#f7fafc" }}>
-            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-              <h2 style={{ textAlign: "center", fontSize: 28, fontWeight: 800, marginBottom: 8, color: "#1a1a2e" }}>CIC Furniture क्यों चुनें?</h2>
-              <p style={{ textAlign: "center", color: "#718096", marginBottom: 36, fontSize: 14 }}>Why thousands of Indian businesses trust us</p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 20 }}>
+          <div style={{ padding: "80px 40px", background: "#fff" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+              <div style={{ textAlign: "center", marginBottom: 56 }}>
+                <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 12 }}>WHY CIC FURNITURE</div>
+                <h2 style={{ fontSize: 36, fontWeight: 700, margin: 0 }}>Built to Last. Designed to Inspire.</h2>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 1, background: "#e8e8e8" }}>
                 {[
-                  { icon: "🏆", title: "Premium Quality", desc: "ISI certified materials. Built to last for years in Indian conditions." },
-                  { icon: "💰", title: "Best Prices", desc: "Competitive pricing with EMI options available. No hidden charges." },
-                  { icon: "🚚", title: "Pan-India Delivery", desc: "We deliver across India. Fast and reliable logistics partners." },
-                  { icon: "📄", title: "GST Invoice", desc: "Proper GST billing for all purchases. Claim your input tax credit." },
+                  { icon: "◈", title: "Premium Materials", desc: "Carefully selected materials built for durability and long-term performance in Indian conditions." },
+                  { icon: "◎", title: "Ergonomic Design", desc: "Every product designed with human comfort in mind, reducing fatigue and improving productivity." },
+                  { icon: "◉", title: "Competitive Pricing", desc: "Best-in-class quality at honest prices. No hidden costs. EMI available on all orders." },
+                  { icon: "◌", title: "Dedicated Support", desc: "From selection to installation and beyond — our team is with you every step of the way." },
                 ].map(f => (
-                  <div key={f.title} style={{ background: "white", borderRadius: 12, padding: 22, textAlign: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}>
-                    <div style={{ fontSize: 36, marginBottom: 10 }}>{f.icon}</div>
-                    <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6, color: "#1a1a2e" }}>{f.title}</div>
-                    <div style={{ fontSize: 13, color: "#718096", lineHeight: 1.5 }}>{f.desc}</div>
+                  <div key={f.title} style={{ background: "#fff", padding: 40 }}>
+                    <div style={{ fontSize: 28, marginBottom: 16, color: "#1a1a1a" }}>{f.icon}</div>
+                    <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 10, letterSpacing: 0.5 }}>{f.title}</div>
+                    <div style={{ fontSize: 13, color: "#666", lineHeight: 1.7 }}>{f.desc}</div>
                   </div>
                 ))}
               </div>
@@ -108,80 +124,78 @@ export default function CICFurniture() {
           </div>
 
           {/* Featured Products */}
-          <div style={{ padding: "60px 24px" }}>
-            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-              <h2 style={{ textAlign: "center", fontSize: 28, fontWeight: 800, marginBottom: 8, color: "#1a1a2e" }}>Featured Products</h2>
-              <p style={{ textAlign: "center", color: "#718096", marginBottom: 36, fontSize: 14 }}>Our most popular picks — loved by Indian businesses</p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+          <div style={{ padding: "80px 40px", background: "#f5f5f0" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
+                <div>
+                  <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 10 }}>OUR COLLECTION</div>
+                  <h2 style={{ fontSize: 36, fontWeight: 700, margin: 0 }}>Featured Products</h2>
+                </div>
+                <button onClick={() => nav("products")} style={{ background: "none", border: "1px solid #1a1a1a", padding: "10px 20px", fontSize: 12, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>VIEW ALL →</button>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
                 {products.slice(0, 4).map(p => (
-                  <div key={p.id} style={{ border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-                    <div style={{ background: "linear-gradient(135deg, #1a1a2e, #0f3460)", height: 120, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 56 }}>{p.emoji}</div>
-                    <div style={{ padding: 16 }}>
-                      <div style={{ fontSize: 11, color: "#f6c90e", fontWeight: 700, background: "#1a1a2e", display: "inline-block", padding: "2px 8px", borderRadius: 99, marginBottom: 8 }}>{p.category}</div>
-                      <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6 }}>{p.name}</div>
-                      <div style={{ fontSize: 13, color: "#718096", marginBottom: 12, lineHeight: 1.4 }}>{p.description}</div>
+                  <div key={p.id} style={{ background: "#fff", border: "1px solid #e8e8e8" }}>
+                    <div style={{ background: "#f5f5f0", height: 200, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 72 }}>{p.emoji}</div>
+                    <div style={{ padding: 24 }}>
+                      <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{p.category.toUpperCase()}</div>
+                      <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{p.name}</div>
+                      <div style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>{p.description}</div>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <div>
-                          <div style={{ fontSize: 18, fontWeight: 800, color: "#0f3460" }}>{formatPrice(p.price)}</div>
-                          <div style={{ fontSize: 11, color: "#718096" }}>+ GST • EMI available</div>
+                          <div style={{ fontSize: 18, fontWeight: 700 }}>{formatPrice(p.price)}</div>
+                          <div style={{ fontSize: 10, color: "#888", letterSpacing: 1 }}>+ GST</div>
                         </div>
-                        <button onClick={() => nav("contact")} style={{ background: "#f6c90e", color: "#1a1a2e", border: "none", padding: "7px 14px", borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Enquire</button>
+                        <button onClick={() => nav("contact")} style={{ background: "#1a1a1a", color: "#fff", border: "none", padding: "8px 16px", fontSize: 11, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>ENQUIRE</button>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-              <div style={{ textAlign: "center", marginTop: 32 }}>
-                <button onClick={() => nav("products")} style={{ background: "#1a1a2e", color: "white", border: "none", padding: "12px 28px", borderRadius: 8, fontWeight: 700, fontSize: 15, cursor: "pointer" }}>सभी Products देखें →</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Payment options */}
-          <div style={{ background: "#f7fafc", padding: "40px 24px", textAlign: "center" }}>
-            <div style={{ maxWidth: 800, margin: "0 auto" }}>
-              <h3 style={{ fontWeight: 800, color: "#1a1a2e", marginBottom: 16 }}>Accepted Payment Methods</h3>
-              <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap", fontSize: 14, fontWeight: 600, color: "#4a5568" }}>
-                {["💳 Credit/Debit Card", "📱 UPI", "🏦 Net Banking", "📲 PhonePe / GPay / Paytm", "🏪 Cash on Delivery"].map(p => (
-                  <span key={p} style={{ background: "white", padding: "8px 16px", borderRadius: 99, boxShadow: "0 1px 4px rgba(0,0,0,0.1)" }}>{p}</span>
                 ))}
               </div>
             </div>
           </div>
 
           {/* CTA */}
-          <div style={{ background: "#f6c90e", padding: "50px 24px", textAlign: "center" }}>
-            <h2 style={{ fontSize: 26, fontWeight: 800, color: "#1a1a2e", margin: "0 0 10px" }}>अपने Office के लिए Free Quote लें!</h2>
-            <p style={{ fontSize: 15, color: "#1a1a2e", opacity: 0.75, margin: "0 0 24px" }}>No obligations. Just a friendly conversation about your needs.</p>
-            <button onClick={() => nav("contact")} style={{ background: "#1a1a2e", color: "white", border: "none", padding: "14px 28px", borderRadius: 8, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>Free Quote पाएं →</button>
+          <div style={{ background: "#1a1a1a", color: "#fff", padding: "80px 40px", textAlign: "center" }}>
+            <div style={{ maxWidth: 600, margin: "0 auto" }}>
+              <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 16 }}>GET STARTED</div>
+              <h2 style={{ fontSize: 36, fontWeight: 700, margin: "0 0 16px" }}>Ready to Transform Your Workspace?</h2>
+              <p style={{ color: "#aaa", fontSize: 15, margin: "0 0 32px", lineHeight: 1.7 }}>Get a free consultation and personalised quote for your office. No obligations.</p>
+              <button onClick={() => nav("contact")} style={{ background: "#fff", color: "#1a1a1a", border: "none", padding: "14px 32px", fontSize: 13, fontWeight: 700, letterSpacing: 1, cursor: "pointer" }}>REQUEST A FREE QUOTE</button>
+            </div>
           </div>
         </div>
       )}
 
       {/* PRODUCTS */}
       {page === "products" && (
-        <div style={{ padding: "40px 24px", maxWidth: 1100, margin: "0 auto" }}>
-          <h1 style={{ fontSize: 32, fontWeight: 800, color: "#1a1a2e", marginBottom: 4 }}>Our Products</h1>
-          <p style={{ color: "#718096", marginBottom: 8, fontSize: 14 }}>All prices exclusive of GST • EMI available on orders above ₹10,000</p>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 28, marginTop: 16 }}>
+        <div style={{ padding: "60px 40px", maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ marginBottom: 48 }}>
+            <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 10 }}>OUR RANGE</div>
+            <h1 style={{ fontSize: 40, fontWeight: 700, margin: "0 0 8px" }}>All Products</h1>
+            <p style={{ color: "#666", fontSize: 14 }}>All prices exclusive of GST · EMI available on orders above ₹10,000</p>
+          </div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 40 }}>
             {categories.map(c => (
-              <button key={c} onClick={() => setFilterCat(c)} style={{ padding: "8px 16px", borderRadius: 99, border: "2px solid", borderColor: filterCat === c ? "#1a1a2e" : "#e2e8f0", background: filterCat === c ? "#1a1a2e" : "white", color: filterCat === c ? "white" : "#4a5568", fontWeight: 600, fontSize: 13, cursor: "pointer" }}>{c}</button>
+              <button key={c} onClick={() => setFilterCat(c)} style={{ padding: "8px 18px", border: "1px solid", borderColor: filterCat === c ? "#1a1a1a" : "#ddd", background: filterCat === c ? "#1a1a1a" : "#fff", color: filterCat === c ? "#fff" : "#444", fontSize: 11, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>
+                {c.toUpperCase()}
+              </button>
             ))}
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
             {filtered.map(p => (
-              <div key={p.id} style={{ border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-                <div style={{ background: "linear-gradient(135deg, #1a1a2e, #0f3460)", height: 120, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 56 }}>{p.emoji}</div>
-                <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 11, color: "#f6c90e", fontWeight: 700, background: "#1a1a2e", display: "inline-block", padding: "2px 8px", borderRadius: 99, marginBottom: 8 }}>{p.category}</div>
-                  <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6 }}>{p.name}</div>
-                  <div style={{ fontSize: 13, color: "#718096", marginBottom: 12, lineHeight: 1.4 }}>{p.description}</div>
+              <div key={p.id} style={{ background: "#fff", border: "1px solid #e8e8e8" }}>
+                <div style={{ background: "#f5f5f0", height: 180, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 64 }}>{p.emoji}</div>
+                <div style={{ padding: 24 }}>
+                  <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{p.category.toUpperCase()}</div>
+                  <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{p.name}</div>
+                  <div style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>{p.description}</div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
-                      <div style={{ fontSize: 18, fontWeight: 800, color: "#0f3460" }}>{formatPrice(p.price)}</div>
-                      <div style={{ fontSize: 11, color: "#718096" }}>+ GST</div>
+                      <div style={{ fontSize: 18, fontWeight: 700 }}>{formatPrice(p.price)}</div>
+                      <div style={{ fontSize: 10, color: "#888", letterSpacing: 1 }}>+ GST</div>
                     </div>
-                    <button onClick={() => nav("contact")} style={{ background: "#f6c90e", color: "#1a1a2e", border: "none", padding: "7px 14px", borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Enquire</button>
+                    <button onClick={() => nav("contact")} style={{ background: "#1a1a1a", color: "#fff", border: "none", padding: "8px 16px", fontSize: 11, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>ENQUIRE</button>
                   </div>
                 </div>
               </div>
@@ -193,38 +207,31 @@ export default function CICFurniture() {
       {/* ABOUT */}
       {page === "about" && (
         <div>
-          <div style={{ background: "linear-gradient(135deg, #1a1a2e, #0f3460)", color: "white", padding: "60px 24px", textAlign: "center" }}>
-            <div style={{ fontSize: 56, marginBottom: 16 }}>🏢</div>
-            <h1 style={{ fontSize: 34, fontWeight: 800, margin: "0 0 12px" }}>About CIC Furniture</h1>
-            <p style={{ fontSize: 15, opacity: 0.8, maxWidth: 600, margin: "0 auto" }}>एक परिवार, एक दुकान, एक वादा — quality जो टिके।</p>
+          <div style={{ background: "#f5f5f0", padding: "80px 40px" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+              <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 16 }}>OUR STORY</div>
+              <h1 style={{ fontSize: 52, fontWeight: 700, margin: "0 0 24px", maxWidth: 600, lineHeight: 1.1 }}>Furniture That Works As Hard As You Do.</h1>
+              <p style={{ fontSize: 16, color: "#555", maxWidth: 560, lineHeight: 1.8 }}>CIC Furniture is a family-run retail outlet committed to bringing premium quality office furniture to Indian businesses of every size.</p>
+            </div>
           </div>
-          <div style={{ padding: "50px 24px", maxWidth: 800, margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32, marginBottom: 40 }}>
+          <div style={{ padding: "80px 40px" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 60 }}>
               <div>
-                <h2 style={{ fontSize: 22, fontWeight: 800, color: "#1a1a2e", marginBottom: 12 }}>हमारी कहानी</h2>
-                <p style={{ color: "#4a5568", lineHeight: 1.8 }}>CIC Furniture एक family-run retail outlet है जो Indian businesses को premium quality office furniture provide करती है। हम मानते हैं कि हर workspace को ऐसा furniture deserve करता है जो functional भी हो और सुंदर भी।</p>
+                <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 16 }}>OUR MISSION</div>
+                <p style={{ fontSize: 15, color: "#444", lineHeight: 1.8 }}>To provide Indian businesses with furniture that combines international design standards with local practicality — at honest, transparent prices. We believe every workspace deserves quality without compromise.</p>
               </div>
               <div>
-                <h2 style={{ fontSize: 22, fontWeight: 800, color: "#1a1a2e", marginBottom: 12 }}>हमारा Mission</h2>
-                <p style={{ color: "#4a5568", lineHeight: 1.8 }}>Honest prices पर best office furniture देना, साथ में genuine after-sales support। हम सिर्फ furniture नहीं बेचते — हम आपको एक better workspace बनाने में help करते हैं।</p>
+                <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 16 }}>OUR VALUES</div>
+                <p style={{ fontSize: 15, color: "#444", lineHeight: 1.8 }}>Quality, transparency and long-term relationships. We're not just a furniture store — we're a workspace partner. From initial consultation to after-sales service, we stand behind every product we sell.</p>
               </div>
             </div>
-
-            <div style={{ background: "#f7fafc", borderRadius: 16, padding: 28, textAlign: "center", marginBottom: 32 }}>
-              <h2 style={{ fontSize: 22, fontWeight: 800, color: "#1a1a2e", marginBottom: 20 }}>Numbers में CIC</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 16 }}>
-                {[["500+", "खुश Customers"], ["4", "Product Categories"], ["100+", "Products"], ["5⭐", "Customer Rating"]].map(([num, label]) => (
-                  <div key={label}>
-                    <div style={{ fontSize: 30, fontWeight: 800, color: "#0f3460" }}>{num}</div>
-                    <div style={{ fontSize: 13, color: "#718096" }}>{label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ background: "#fff8e1", border: "1px solid #f6c90e", borderRadius: 12, padding: 20 }}>
-              <div style={{ fontWeight: 700, color: "#1a1a2e", marginBottom: 8 }}>🇮🇳 Made for India</div>
-              <p style={{ fontSize: 14, color: "#4a5568", margin: 0, lineHeight: 1.6 }}>Our furniture is designed keeping Indian office environments in mind — built to handle India's climate, built for Indian spaces, and priced for Indian budgets. GST invoices provided for all purchases.</p>
+            <div style={{ maxWidth: 1200, margin: "60px auto 0", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 1, background: "#e8e8e8" }}>
+              {[["500+", "Happy Clients"], ["100+", "Products"], ["4", "Categories"], ["5★", "Rated"]].map(([num, label]) => (
+                <div key={label} style={{ background: "#f5f5f0", padding: 40, textAlign: "center" }}>
+                  <div style={{ fontSize: 40, fontWeight: 800, color: "#1a1a1a" }}>{num}</div>
+                  <div style={{ fontSize: 11, letterSpacing: 2, color: "#888", marginTop: 8 }}>{label.toUpperCase()}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -233,63 +240,58 @@ export default function CICFurniture() {
       {/* CONTACT */}
       {page === "contact" && (
         <div>
-          <div style={{ background: "linear-gradient(135deg, #1a1a2e, #0f3460)", color: "white", padding: "60px 24px", textAlign: "center" }}>
-            <div style={{ fontSize: 56, marginBottom: 16 }}>📞</div>
-            <h1 style={{ fontSize: 34, fontWeight: 800, margin: "0 0 12px" }}>बात करें हमसे</h1>
-            <p style={{ fontSize: 15, opacity: 0.8 }}>We'd love to help you find the perfect furniture for your office.</p>
+          <div style={{ background: "#f5f5f0", padding: "80px 40px" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+              <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 16 }}>GET IN TOUCH</div>
+              <h1 style={{ fontSize: 52, fontWeight: 700, margin: 0, lineHeight: 1.1 }}>Let's Find the Right<br />Furniture For You.</h1>
+            </div>
           </div>
-          <div style={{ padding: "50px 24px", maxWidth: 800, margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32 }}>
+          <div style={{ padding: "80px 40px" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80 }}>
               <div>
-                <h2 style={{ fontSize: 20, fontWeight: 800, color: "#1a1a2e", marginBottom: 20 }}>Contact Details</h2>
+                <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 32 }}>CONTACT DETAILS</div>
                 {[
-                  { icon: "📍", label: "Address", value: "Your Store Address Here" },
-                  { icon: "📞", label: "Phone / WhatsApp", value: "+91 XXXXX XXXXX" },
-                  { icon: "📧", label: "Email", value: "info@cicfurniture.in" },
-                  { icon: "🕐", label: "Store Hours", value: "सोम–शनि: सुबह 9 बजे – शाम 7 बजे" },
-                  { icon: "📱", label: "UPI ID", value: "cicfurniture@upi" },
+                  { label: "ADDRESS", value: "Your Store Address Here" },
+                  { label: "PHONE & WHATSAPP", value: "+91 XXXXX XXXXX" },
+                  { label: "EMAIL", value: "info@cicfurniture.in" },
+                  { label: "STORE HOURS", value: "Monday – Saturday, 9:00 AM – 7:00 PM" },
+                  { label: "GST NUMBER", value: "XXXXXXXXXXXX" },
                 ].map(c => (
-                  <div key={c.label} style={{ display: "flex", gap: 14, marginBottom: 18, alignItems: "flex-start" }}>
-                    <div style={{ fontSize: 22 }}>{c.icon}</div>
-                    <div>
-                      <div style={{ fontWeight: 700, fontSize: 13, color: "#1a1a2e" }}>{c.label}</div>
-                      <div style={{ fontSize: 14, color: "#718096" }}>{c.value}</div>
-                    </div>
+                  <div key={c.label} style={{ marginBottom: 28, paddingBottom: 28, borderBottom: "1px solid #e8e8e8" }}>
+                    <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 6 }}>{c.label}</div>
+                    <div style={{ fontSize: 15, color: "#1a1a1a", fontWeight: 500 }}>{c.value}</div>
                   </div>
                 ))}
-
-                <div style={{ background: "#f0fff4", border: "1px solid #9ae6b4", borderRadius: 10, padding: 14, marginTop: 8 }}>
-                  <div style={{ fontWeight: 700, fontSize: 13, color: "#276749", marginBottom: 4 }}>💬 WhatsApp पर Order करें</div>
-                  <div style={{ fontSize: 13, color: "#4a5568" }}>Quick quotes and order confirmations on WhatsApp. Just send us a message!</div>
+                <div style={{ background: "#f5f5f0", padding: 24, marginTop: 8 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 1, marginBottom: 6 }}>QUICK ENQUIRY VIA WHATSAPP</div>
+                  <div style={{ fontSize: 13, color: "#666", lineHeight: 1.6 }}>Prefer WhatsApp? Send us a message directly for fast quotes and order confirmation.</div>
                 </div>
               </div>
-
               <div>
-                <h2 style={{ fontSize: 20, fontWeight: 800, color: "#1a1a2e", marginBottom: 20 }}>enquiry भेजें</h2>
+                <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 32 }}>SEND AN ENQUIRY</div>
                 {submitted ? (
-                  <div style={{ background: "#f0fff4", border: "1px solid #9ae6b4", borderRadius: 12, padding: 24, textAlign: "center" }}>
-                    <div style={{ fontSize: 40, marginBottom: 12 }}>✅</div>
-                    <div style={{ fontWeight: 700, color: "#276749", fontSize: 16 }}>Enquiry मिल गई!</div>
-                    <div style={{ color: "#4a5568", fontSize: 14, marginTop: 6 }}>हम जल्द ही आपसे संपर्क करेंगे।</div>
-                    <button onClick={() => setSubmitted(false)} style={{ marginTop: 16, background: "#1a1a2e", color: "white", border: "none", padding: "8px 18px", borderRadius: 8, cursor: "pointer", fontWeight: 600 }}>Another Enquiry</button>
+                  <div style={{ padding: 40, border: "1px solid #e8e8e8", textAlign: "center" }}>
+                    <div style={{ fontSize: 32, marginBottom: 16 }}>✓</div>
+                    <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>Enquiry Received</div>
+                    <div style={{ color: "#666", fontSize: 14 }}>We'll get back to you within 24 hours.</div>
+                    <button onClick={() => setSubmitted(false)} style={{ marginTop: 24, background: "#1a1a1a", color: "#fff", border: "none", padding: "10px 20px", fontSize: 12, fontWeight: 600, letterSpacing: 1, cursor: "pointer" }}>SEND ANOTHER</button>
                   </div>
                 ) : (
                   <div>
-                    {[["आपका नाम *", "name", "text"], ["Mobile Number *", "phone", "tel"], ["Email Address", "email", "email"]].map(([label, key, type]) => (
-                      <div key={key} style={{ marginBottom: 12 }}>
-                        <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#4a5568", marginBottom: 4 }}>{label}</label>
+                    {[["Full Name", "name", "text"], ["Phone Number", "phone", "tel"], ["Email Address", "email", "email"]].map(([label, key, type]) => (
+                      <div key={key} style={{ marginBottom: 20 }}>
+                        <label style={{ display: "block", fontSize: 10, fontWeight: 700, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{label.toUpperCase()}</label>
                         <input type={type} value={contactForm[key]} onChange={e => setContactForm({ ...contactForm, [key]: e.target.value })}
-                          style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 14, boxSizing: "border-box" }} />
+                          style={{ width: "100%", padding: "12px 0", borderBottom: "1px solid #1a1a1a", border: "none", borderBottom: "1px solid #ddd", fontSize: 14, outline: "none", boxSizing: "border-box", background: "transparent" }} />
                       </div>
                     ))}
-                    <div style={{ marginBottom: 16 }}>
-                      <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#4a5568", marginBottom: 4 }}>आपकी जरूरत बताएं</label>
+                    <div style={{ marginBottom: 28 }}>
+                      <label style={{ display: "block", fontSize: 10, fontWeight: 700, letterSpacing: 2, color: "#888", marginBottom: 8 }}>YOUR REQUIREMENTS</label>
                       <textarea value={contactForm.message} onChange={e => setContactForm({ ...contactForm, message: e.target.value })} rows={4}
-                        placeholder="जैसे: 10 office chairs चाहिए, budget ₹50,000..."
-                        style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 14, boxSizing: "border-box", resize: "vertical" }} />
+                        placeholder="e.g. 10 office chairs, budget ₹1,00,000..."
+                        style={{ width: "100%", padding: "12px 0", borderBottom: "1px solid #ddd", border: "none", borderBottom: "1px solid #ddd", fontSize: 14, outline: "none", resize: "none", boxSizing: "border-box", background: "transparent" }} />
                     </div>
-                    <button onClick={() => setSubmitted(true)} style={{ width: "100%", background: "#1a1a2e", color: "white", border: "none", padding: 14, borderRadius: 8, fontWeight: 700, fontSize: 15, cursor: "pointer" }}>Enquiry भेजें →</button>
-                    <div style={{ fontSize: 12, color: "#718096", textAlign: "center", marginTop: 8 }}>या सीधे WhatsApp करें: +91 XXXXX XXXXX</div>
+                    <button onClick={() => setSubmitted(true)} style={{ background: "#1a1a1a", color: "#fff", border: "none", padding: "14px 32px", fontSize: 12, fontWeight: 700, letterSpacing: 1, cursor: "pointer", width: "100%" }}>SUBMIT ENQUIRY</button>
                   </div>
                 )}
               </div>
@@ -299,15 +301,29 @@ export default function CICFurniture() {
       )}
 
       {/* Footer */}
-      <footer style={{ background: "#1a1a2e", color: "white", padding: "32px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-          <div style={{ fontSize: 20, fontWeight: 800, color: "#f6c90e", marginBottom: 4 }}>CIC FURNITURE</div>
-          <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 16 }}>Quality You Can Feel • cicfurniture.in</div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap", marginBottom: 16 }}>
-            {navItems.map(n => <span key={n.key} onClick={() => nav(n.key)} style={{ fontSize: 13, opacity: 0.7, cursor: "pointer" }}>{n.label}</span>)}
+      <footer style={{ background: "#1a1a1a", color: "#fff", padding: "48px 40px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32 }}>
+          <div>
+            <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: 3 }}>CIC</div>
+            <div style={{ fontSize: 8, letterSpacing: 4, color: "#666", marginTop: -2 }}>FURNITURE</div>
+            <div style={{ fontSize: 12, color: "#666", marginTop: 16, maxWidth: 240, lineHeight: 1.6 }}>Premium office furniture for modern Indian workspaces.</div>
           </div>
-          <div style={{ fontSize: 12, opacity: 0.4, marginBottom: 4 }}>© 2026 CIC Furniture. All rights reserved.</div>
-          <div style={{ fontSize: 11, opacity: 0.35 }}>GST Registration No: XXXXXXXXXXXX</div>
+          <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
+            <div>
+              <div style={{ fontSize: 10, letterSpacing: 2, color: "#666", marginBottom: 16 }}>NAVIGATE</div>
+              {navItems.map(n => <div key={n.key} onClick={() => nav(n.key)} style={{ fontSize: 13, color: "#aaa", marginBottom: 10, cursor: "pointer", letterSpacing: 0.5 }}>{n.label}</div>)}
+            </div>
+            <div>
+              <div style={{ fontSize: 10, letterSpacing: 2, color: "#666", marginBottom: 16 }}>CONTACT</div>
+              <div style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>info@cicfurniture.in</div>
+              <div style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>cicfurniture.in</div>
+              <div style={{ fontSize: 13, color: "#aaa" }}>+91 XXXXX XXXXX</div>
+            </div>
+          </div>
+        </div>
+        <div style={{ maxWidth: 1200, margin: "32px auto 0", paddingTop: 24, borderTop: "1px solid #333", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+          <div style={{ fontSize: 11, color: "#555" }}>© 2026 CIC Furniture. All rights reserved.</div>
+          <div style={{ fontSize: 11, color: "#555" }}>GST Reg: XXXXXXXXXXXX</div>
         </div>
       </footer>
     </div>
