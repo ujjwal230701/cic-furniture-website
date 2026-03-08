@@ -251,11 +251,11 @@ export default function CICFurniture() {
               <div>
                 <div style={{ fontSize: 11, letterSpacing: 4, color: "#888", marginBottom: 32 }}>CONTACT DETAILS</div>
                 {[
-                  { label: "ADDRESS", value: "Your Store Address Here" },
-                  { label: "PHONE & WHATSAPP", value: "+91 XXXXX XXXXX" },
-                  { label: "EMAIL", value: "info@cicfurniture.in" },
+                  { label: "ADDRESS", value: "Plot no. 305, Industrial Area, Phase 2, Chandigarh" },
+                  { label: "PHONE & WHATSAPP", value: "+91 9501798358" },
+                  { label: "EMAIL", value: "furniturecic@gmail.com" },
                   { label: "STORE HOURS", value: "Monday – Saturday, 9:00 AM – 7:00 PM" },
-                  { label: "GST NUMBER", value: "XXXXXXXXXXXX" },
+                  { label: "GST NUMBER", value: "ATHYFGTYS3R" },
                 ].map(c => (
                   <div key={c.label} style={{ marginBottom: 28, paddingBottom: 28, borderBottom: "1px solid #e8e8e8" }}>
                     <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 6 }}>{c.label}</div>
@@ -315,15 +315,15 @@ export default function CICFurniture() {
             </div>
             <div>
               <div style={{ fontSize: 10, letterSpacing: 2, color: "#666", marginBottom: 16 }}>CONTACT</div>
-              <div style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>info@cicfurniture.in</div>
+              <div style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>furniturecic@gmail.com</div>
               <div style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>cicfurniture.in</div>
-              <div style={{ fontSize: 13, color: "#aaa" }}>+91 XXXXX XXXXX</div>
+              <div style={{ fontSize: 13, color: "#aaa" }}>+91 9501798358</div>
             </div>
           </div>
         </div>
         <div style={{ maxWidth: 1200, margin: "32px auto 0", paddingTop: 24, borderTop: "1px solid #333", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
           <div style={{ fontSize: 11, color: "#555" }}>© 2026 CIC Furniture. All rights reserved.</div>
-          <div style={{ fontSize: 11, color: "#555" }}>GST Reg: XXXXXXXXXXXX</div>
+          <div style={{ fontSize: 11, color: "#555" }}>GST Reg: OJLS6NINXSR</div>
         </div>
       </footer>
     </div>
