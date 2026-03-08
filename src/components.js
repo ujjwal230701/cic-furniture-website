@@ -1,18 +1,6 @@
-import { STORE, formatPrice } from "./config";
-
-// ── Shared Styles ──────────────────────────
-export const S = {
-  label: { fontSize: 10, letterSpacing: 3, color: "#888", marginBottom: 12, display: "block" },
-  h1: { fontSize: 48, fontWeight: 800, lineHeight: 1.1, margin: "0 0 20px", color: "#1a1a1a" },
-  h2: { fontSize: 34, fontWeight: 700, margin: "0 0 16px", color: "#1a1a1a" },
-  body: { fontSize: 15, color: "#555", lineHeight: 1.8 },
-  btnPrimary: { background: "#1a1a1a", color: "#fff", border: "none", padding: "13px 28px", fontSize: 11, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer" },
-  btnOutline: { background: "transparent", color: "#1a1a1a", border: "1px solid #1a1a1a", padding: "13px 28px", fontSize: 11, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer" },
-  btnSmall: { background: "#1a1a1a", color: "#fff", border: "none", padding: "8px 16px", fontSize: 10, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer" },
-  section: { padding: "80px 40px" },
-  container: { maxWidth: 1200, margin: "0 auto" },
-  divider: { height: 1, background: "#e8e8e8", margin: "0" },
-};
+import { useState } from "react";
+import { S } from "./styles";
+import { formatPrice, STORE, CATEGORIES } from "./config";
 
 // ── Navbar ─────────────────────────────────
 export function Navbar({ page, nav }) {
@@ -76,9 +64,13 @@ export function Footer({ nav }) {
 export function ProductCard({ product, nav }) {
   return (
     <div style={{ background: "#fff", border: "1px solid #e8e8e8" }}>
-      <div style={{ background: "#f5f5f0", height: 180, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 64 }}>{product.emoji}</div>
+      <div style={{ background: "#f5f5f0", height: 200, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+        {product.image_url
+          ? <img src={product.image_url} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          : <span style={{ fontSize: 64 }}>📦</span>}
+      </div>
       <div style={{ padding: 24 }}>
-        <div style={{ ...S.label, marginBottom: 8 }}>{product.category.toUpperCase()}</div>
+        <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{product.category.toUpperCase()}</div>
         <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{product.name}</div>
         <div style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>{product.description}</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -116,7 +108,7 @@ export function SectionHeader({ label, title, align = "left" }) {
   );
 }
 
-// ── Contact Info Block ─────────────────────
+// ── Contact Info ───────────────────────────
 export function ContactInfo() {
   const details = [
     { label: "ADDRESS", value: STORE.address },
@@ -136,8 +128,41 @@ export function ContactInfo() {
       ))}
       <div style={{ background: "#f5f5f0", padding: 20 }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, marginBottom: 6 }}>QUICK ENQUIRY VIA WHATSAPP</div>
-        <div style={{ fontSize: 13, color: "#666", lineHeight: 1.6 }}>Send us a message on {STORE.whatsapp} for fast quotes and order confirmation.</div>
+        <div style={{ fontSize: 13, color: "#666", lineHeight: 1.6 }}>Send us a message on {STORE.whatsapp} for fast quotes.</div>
       </div>
+    </div>
+  );
+}
+
+// ── Contact Form ───────────────────────────
+export function ContactForm() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  if (submitted) return (
+    <div style={{ padding: 40, border: "1px solid #e8e8e8", textAlign: "center" }}>
+      <div style={{ fontSize: 32, marginBottom: 16 }}>✓</div>
+      <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>Enquiry Received</div>
+      <div style={{ color: "#666", fontSize: 14 }}>We'll get back to you within 24 hours.</div>
+      <button onClick={() => setSubmitted(false)} style={{ ...S.btnPrimary, marginTop: 24 }}>SEND ANOTHER</button>
+    </div>
+  );
+  return (
+    <div>
+      <div style={{ ...S.label, marginBottom: 32 }}>SEND AN ENQUIRY</div>
+      {[["Full Name", "name", "text"], ["Phone Number", "phone", "tel"], ["Email Address", "email", "email"]].map(([label, key, type]) => (
+        <div key={key} style={{ marginBottom: 20 }}>
+          <label style={S.label}>{label.toUpperCase()}</label>
+          <input type={type} value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })}
+            style={{ width: "100%", padding: "10px 0", borderBottom: "1px solid #ddd", border: "none", fontSize: 14, outline: "none", boxSizing: "border-box", background: "transparent" }} />
+        </div>
+      ))}
+      <div style={{ marginBottom: 28 }}>
+        <label style={S.label}>YOUR REQUIREMENTS</label>
+        <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} rows={4}
+          placeholder="e.g. 10 office chairs, budget ₹1,00,000..."
+          style={{ width: "100%", padding: "10px 0", borderBottom: "1px solid #ddd", border: "none", fontSize: 14, outline: "none", resize: "none", boxSizing: "border-box", background: "transparent" }} />
+      </div>
+      <button onClick={() => setSubmitted(true)} style={{ ...S.btnPrimary, width: "100%" }}>SUBMIT ENQUIRY</button>
     </div>
   );
 }
