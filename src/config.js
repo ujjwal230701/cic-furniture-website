@@ -3,7 +3,7 @@
 // ============================================
 
 export const SUPABASE_URL = "https://snjnphnxhoucvlnryqlb.supabase.co";
-export const SUPABASE_KEY = "sb_publishable_dJfN_HUndUWPq6440yogVA_RfK4XGGY";
+export const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuam5waG54aG91Y3ZsbnJ5cWxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NTExNjMsImV4cCI6MjA4ODUyNzE2M30.INa33D6ETTxbXMIR0aKNQiQShTN6_kEkQWBPMD3Burw";
 
 export const STORE = {
   name: "CIC Furniture",
