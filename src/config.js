@@ -5,14 +5,14 @@
 export const STORE = {
   name: "CIC Furniture",
   tagline: "Premium office furniture for modern Indian workspaces.",
-  phone: "+91 XXXXX XXXXX",
-  email: "info@cicfurniture.in",
+  phone: "+91 9501798358",
+  email: "furnniturecic@gmail.com",
   website: "cicfurniture.in",
-  address: "Your Store Address Here",
+  address: "305, Industrial Area Phase II, Chandigarh, 160002",
   hours: "Monday – Saturday, 9:00 AM – 7:00 PM",
-  gst: "XXXXXXXXXXXX",
-  upi: "cicfurniture@upi",
-  whatsapp: "+91 XXXXX XXXXX",
+  gst: "PLWAJUH69O",
+  upi: "9501798358@paytm",
+  whatsapp: "+91 9501798358",
 };
 
 export const PRODUCTS = [
