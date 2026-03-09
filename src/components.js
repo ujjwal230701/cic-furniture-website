@@ -63,14 +63,14 @@ export function Footer({ nav }) {
 // ── Product Card ───────────────────────────
 export function ProductCard({ product, nav }) {
   return (
-    <div style={{ background: "#fff", border: "1px solid #e8e8e8" }}>
-      <div style={{ background: "#f5f5f0", height: 200, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+    <div onClick={() => nav("product", product)} style={{ background: "#fff", border: "1px solid #e8e8e8", cursor: "pointer" }}>
+      <div style={{ background: "#f5f5f0", height: 220, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         {product.image_url
-          ? <img src={product.image_url} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          ? <img src={product.image_url} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 12 }} />
           : <span style={{ fontSize: 64 }}>📦</span>}
       </div>
       <div style={{ padding: 24 }}>
-        <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{product.category.toUpperCase()}</div>
+        <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{product.category?.toUpperCase()}</div>
         <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{product.name}</div>
         <div style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>{product.description}</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -78,12 +78,13 @@ export function ProductCard({ product, nav }) {
             <div style={{ fontSize: 18, fontWeight: 700 }}>{formatPrice(product.price)}</div>
             <div style={{ fontSize: 10, color: "#888", letterSpacing: 1 }}>+ GST</div>
           </div>
-          <button onClick={() => nav("contact")} style={S.btnSmall}>ENQUIRE</button>
+          <button onClick={e => { e.stopPropagation(); nav("contact"); }} style={S.btnSmall}>ENQUIRE</button>
         </div>
       </div>
     </div>
   );
 }
+
 
 // ── Page Hero ──────────────────────────────
 export function PageHero({ label, title, subtitle }) {
