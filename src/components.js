@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { S } from "./styles";
 import { formatPrice, STORE, CATEGORIES } from "./config";
+import { useEffect, useRef, useState } from "react";
+import { supabase } from "./supabaseClient";
+
 
 // ── Navbar ─────────────────────────────────
 export function Navbar({ page, nav }) {
