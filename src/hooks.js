@@ -10,3 +10,13 @@ export function useProducts() {
   }, []);
   return { products, loading };
 }
+
+export function useProductImages(productId) {
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    if (!productId) return;
+    supabase.from("products_images").select("*").eq("product_id", productId).order("sort_order")
+      .then(({ data }) => setImages(data || []));
+  }, [productId]);
+  return images;
+}
