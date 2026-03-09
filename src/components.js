@@ -60,30 +60,85 @@ export function Footer({ nav }) {
   );
 }
 
-// ── Product Card ───────────────────────────
-export function ProductCard({ product, nav }) {
+// ── Product Card Image Swiper ──────────────
+function CardSwiper({ images, activeImg, setActiveImg, onTouchStart, onTouchEnd }) {
   return (
-    <div onClick={() => nav("product", product)} style={{ background: "#fff", border: "1px solid #e8e8e8", cursor: "pointer" }}>
-      <div style={{ background: "#f5f5f0", height: 220, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-        {product.image_url
-          ? <img src={product.image_url} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 12 }} />
-          : <span style={{ fontSize: 64 }}>📦</span>}
-      </div>
-      <div style={{ padding: 24 }}>
-        <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{product.category?.toUpperCase()}</div>
-        <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{product.name}</div>
-        <div style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>{product.description}</div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div>
-            <div style={{ fontSize: 18, fontWeight: 700 }}>{formatPrice(product.price)}</div>
-            <div style={{ fontSize: 10, color: "#888", letterSpacing: 1 }}>+ GST</div>
+    <div style={{ position: "relative", background: "#f5f5f0", height: 220, overflow: "hidden" }}
+      onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+
+      {images.length > 0
+        ? <img src={images[activeImg]} alt="product" style={{ width: "100%", height: "100%", objectFit: "contain", padding: 12 }} />
+        : <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}><span style={{ fontSize: 64 }}>📦</span></div>}
+
+      {images.length > 1 && (
+        <>
+          {activeImg > 0 && (
+            <button onClick={e => { e.stopPropagation(); setActiveImg(i => i - 1); }}
+              style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "none", width: 28, height: 28, cursor: "pointer", fontSize: 14 }}>‹</button>
+          )}
+          {activeImg < images.length - 1 && (
+            <button onClick={e => { e.stopPropagation(); setActiveImg(i => i + 1); }}
+              style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "none", width: 28, height: 28, cursor: "pointer", fontSize: 14 }}>›</button>
+          )}
+          <div style={{ position: "absolute", bottom: 8, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 4 }}>
+            {images.map((_, i) => (
+              <div key={i} onClick={e => { e.stopPropagation(); setActiveImg(i); }}
+                style={{ width: 6, height: 6, borderRadius: "50%", background: activeImg === i ? "#1a1a1a" : "rgba(0,0,0,0.3)", cursor: "pointer" }} />
+            ))}
           </div>
-          <button onClick={e => { e.stopPropagation(); nav("contact"); }} style={S.btnSmall}>ENQUIRE</button>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ── Product Card Info ──────────────────────
+function CardInfo({ product, nav }) {
+  return (
+    <div style={{ padding: 24 }}>
+      <div style={{ fontSize: 10, letterSpacing: 2, color: "#888", marginBottom: 8 }}>{product.category?.toUpperCase()}</div>
+      <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{product.name}</div>
+      <div style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>{product.description}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>{formatPrice(product.price)}</div>
+          <div style={{ fontSize: 10, color: "#888", letterSpacing: 1 }}>+ GST</div>
         </div>
+        <button onClick={e => { e.stopPropagation(); nav("contact"); }} style={S.btnSmall}>ENQUIRE</button>
       </div>
     </div>
   );
 }
+
+// ── Product Card ───────────────────────────
+export function ProductCard({ product, nav }) {
+  const [images, setImages] = useState([]);
+  const [activeImg, setActiveImg] = useState(0);
+  const touchStartX = useRef(null);
+
+  useEffect(() => {
+    const base = product.image_url ? [product.image_url] : [];
+    supabase.from("products_images").select("image_url").eq("product_id", product.id).order("sort_order")
+      .then(({ data }) => setImages([...base, ...(data || []).map(d => d.image_url)]));
+  }, [product.id]);
+
+  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 40) setActiveImg(i => Math.min(i + 1, images.length - 1));
+    else if (diff < -40) setActiveImg(i => Math.max(i - 1, 0));
+    touchStartX.current = null;
+  };
+
+  return (
+    <div onClick={() => nav("product", product)} style={{ background: "#fff", border: "1px solid #e8e8e8", cursor: "pointer" }}>
+      <CardSwiper images={images} activeImg={activeImg} setActiveImg={setActiveImg} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} />
+      <CardInfo product={product} nav={nav} />
+    </div>
+  );
+}
+
 
 
 // ── Page Hero ──────────────────────────────
