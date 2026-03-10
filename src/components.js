@@ -38,15 +38,19 @@ export function Navbar({ page, nav }) {
       </nav>
 
       {menuOpen && (
-        <div className="mobile-nav" style={{ position: "fixed", top: 64, left: 0, right: 0, bottom: 0, background: "#fff", zIndex: 99, padding: 32, display: "flex", flexDirection: "column", gap: 8 }}>
-          {navItems.map(n => (
-            <button key={n.key} onClick={() => goTo(n.key)} style={{ background: page === n.key ? "#f5f5f0" : "none", border: "none", borderLeft: page === n.key ? "3px solid #1a1a1a" : "3px solid transparent", cursor: "pointer", fontSize: 16, fontWeight: page === n.key ? 700 : 400, color: "#1a1a1a", letterSpacing: 1.5, padding: "14px 16px", textAlign: "left" }}>
-              {n.label}
-            </button>
-          ))}
-          <button onClick={() => goTo("contact")} style={{ ...S.btnPrimary, marginTop: 16, padding: 16, fontSize: 13 }}>GET A QUOTE</button>
-        </div>
-      )}
+  <div className="mobile-nav" style={{ position: "fixed", top: 64, left: 0, right: 0, bottom: 0, background: "#fff", zIndex: 99, padding: 24, display: "flex", flexDirection: "column", gap: 4 }}>
+    {navItems.map(n => (
+      <button key={n.key} onClick={() => goTo(n.key)}
+        style={{ width: "100%", background: page === n.key ? "#f5f5f0" : "none", border: "none", borderLeft: page === n.key ? "3px solid #1a1a1a" : "3px solid transparent", cursor: "pointer", fontSize: 16, fontWeight: page === n.key ? 700 : 400, color: "#1a1a1a", letterSpacing: 1.5, padding: "16px 20px", textAlign: "left", display: "block" }}>
+        {n.label}
+      </button>
+    ))}
+    <button onClick={() => goTo("contact")} style={{ ...S.btnPrimary, width: "100%", marginTop: 16, padding: 16, fontSize: 13, display: "block" }}>
+      GET A QUOTE
+    </button>
+  </div>
+)}
+
 
       <style>{`
         .desktop-nav { display: flex !important; }
