@@ -65,31 +65,30 @@ export function Navbar({ page, nav }) {
 export function Footer({ nav }) {
   const navItems = ["home", "products", "about", "contact"];
   return (
-    <footer style={{ background: "#1a1a1a", color: "#fff", padding: "56px 40px 32px" }}>
-      <div style={{ ...S.container, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 40 }}>
+    <footer style={{ background: "#1a1a1a", color: "#fff", padding: "48px 24px 28px" }}>
+      <div style={{ ...S.container, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 32 }}>
         <div>
           <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: 3 }}>CIC</div>
           <div style={{ fontSize: 8, letterSpacing: 4, color: "#555", marginTop: -2 }}>FURNITURE</div>
-          <div style={{ fontSize: 12, color: "#666", marginTop: 16, maxWidth: 220, lineHeight: 1.7 }}>{STORE.tagline}</div>
+          <div style={{ fontSize: 12, color: "#666", marginTop: 14, lineHeight: 1.7 }}>Premium office furniture for modern Indian workspaces.</div>
         </div>
-        <div style={{ display: "flex", gap: 56, flexWrap: "wrap" }}>
-          <div>
-            <div style={{ fontSize: 9, letterSpacing: 3, color: "#555", marginBottom: 16 }}>NAVIGATE</div>
-            {navItems.map(n => <div key={n} onClick={() => nav(n)} style={{ fontSize: 13, color: "#aaa", marginBottom: 10, cursor: "pointer", letterSpacing: 0.5, textTransform: "capitalize" }}>{n}</div>)}
-          </div>
-          <div>
-            <div style={{ fontSize: 9, letterSpacing: 3, color: "#555", marginBottom: 16 }}>CONTACT</div>
-            {[STORE.email, STORE.website, STORE.phone].map(v => <div key={v} style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>{v}</div>)}
-          </div>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 3, color: "#555", marginBottom: 14 }}>NAVIGATE</div>
+          {navItems.map(n => <div key={n} onClick={() => nav(n)} style={{ fontSize: 13, color: "#aaa", marginBottom: 10, cursor: "pointer", textTransform: "capitalize" }}>{n}</div>)}
+        </div>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 3, color: "#555", marginBottom: 14 }}>CONTACT</div>
+          {[STORE.email, STORE.website, STORE.phone].map(v => <div key={v} style={{ fontSize: 13, color: "#aaa", marginBottom: 10 }}>{v}</div>)}
         </div>
       </div>
-      <div style={{ ...S.container, marginTop: 40, paddingTop: 24, borderTop: "1px solid #2a2a2a", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+      <div style={{ ...S.container, marginTop: 32, paddingTop: 20, borderTop: "1px solid #2a2a2a", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
         <div style={{ fontSize: 11, color: "#444" }}>© 2026 CIC Furniture. All rights reserved.</div>
         <div style={{ fontSize: 11, color: "#444" }}>GST: {STORE.gst}</div>
       </div>
     </footer>
   );
 }
+
 
 // ── Product Card Image Swiper ──────────────
 function CardSwiper({ images, activeImg, setActiveImg, onTouchStart, onTouchEnd }) {
