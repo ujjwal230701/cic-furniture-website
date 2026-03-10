@@ -6,7 +6,7 @@ export default function ContactPage() {
     <div>
       <PageHero label="Get In Touch" title="Let's Find the Right Furniture For You." />
       <div style={S.section}>
-        <div style={{ ...S.container, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 80 }}>
+        <div style={{ ...S.container, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 48 }}>
           <ContactInfo />
           <ContactForm />
         </div>
