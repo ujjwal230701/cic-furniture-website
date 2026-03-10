@@ -6,31 +6,60 @@ import { supabase } from "./supabaseClient";
 
 // ── Navbar ─────────────────────────────────
 export function Navbar({ page, nav }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
     { label: "Home", key: "home" },
     { label: "Products", key: "products" },
     { label: "About", key: "about" },
     { label: "Contact", key: "contact" },
   ];
+  const goTo = (key) => { nav(key); setMenuOpen(false); };
+
   return (
-    <nav style={{ background: "#fff", borderBottom: "1px solid #e8e8e8", padding: "0 40px", position: "sticky", top: 0, zIndex: 100 }}>
-      <div style={{ ...S.container, display: "flex", alignItems: "center", justifyContent: "space-between", height: 70 }}>
-        <div onClick={() => nav("home")} style={{ cursor: "pointer" }}>
-          <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: 3, color: "#1a1a1a" }}>CIC</div>
-          <div style={{ fontSize: 8, letterSpacing: 4, color: "#888", marginTop: -2 }}>FURNITURE</div>
+    <>
+      <nav style={{ background: "#fff", borderBottom: "1px solid #e8e8e8", padding: "0 24px", position: "sticky", top: 0, zIndex: 100 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
+          <div onClick={() => goTo("home")} style={{ cursor: "pointer" }}>
+            <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: 3, color: "#1a1a1a" }}>CIC</div>
+            <div style={{ fontSize: 8, letterSpacing: 4, color: "#888", marginTop: -2 }}>FURNITURE</div>
+          </div>
+          <div className="desktop-nav" style={{ display: "flex", gap: 28 }}>
+            {navItems.map(n => (
+              <button key={n.key} onClick={() => goTo(n.key)} style={{ background: "none", border: "none", borderBottom: page === n.key ? "2px solid #1a1a1a" : "2px solid transparent", cursor: "pointer", fontSize: 11, fontWeight: page === n.key ? 700 : 400, color: page === n.key ? "#1a1a1a" : "#666", letterSpacing: 1.5, paddingBottom: 4 }}>
+                {n.label.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <button onClick={() => goTo("contact")} className="desktop-nav" style={{ ...S.btnPrimary, fontSize: 10 }}>GET A QUOTE</button>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-nav" style={{ background: "none", border: "none", cursor: "pointer", fontSize: 24, color: "#1a1a1a", padding: 4 }}>
+            {menuOpen ? "✕" : "☰"}
+          </button>
         </div>
-        <div style={{ display: "flex", gap: 28 }}>
+      </nav>
+
+      {menuOpen && (
+        <div className="mobile-nav" style={{ position: "fixed", top: 64, left: 0, right: 0, bottom: 0, background: "#fff", zIndex: 99, padding: 32, display: "flex", flexDirection: "column", gap: 8 }}>
           {navItems.map(n => (
-            <button key={n.key} onClick={() => nav(n.key)} style={{ background: "none", border: "none", borderBottom: page === n.key ? "2px solid #1a1a1a" : "2px solid transparent", cursor: "pointer", fontSize: 11, fontWeight: page === n.key ? 700 : 400, color: page === n.key ? "#1a1a1a" : "#666", letterSpacing: 1.5, paddingBottom: 4 }}>
-              {n.label.toUpperCase()}
+            <button key={n.key} onClick={() => goTo(n.key)} style={{ background: page === n.key ? "#f5f5f0" : "none", border: "none", borderLeft: page === n.key ? "3px solid #1a1a1a" : "3px solid transparent", cursor: "pointer", fontSize: 16, fontWeight: page === n.key ? 700 : 400, color: "#1a1a1a", letterSpacing: 1.5, padding: "14px 16px", textAlign: "left" }}>
+              {n.label}
             </button>
           ))}
+          <button onClick={() => goTo("contact")} style={{ ...S.btnPrimary, marginTop: 16, padding: 16, fontSize: 13 }}>GET A QUOTE</button>
         </div>
-        <button onClick={() => nav("contact")} style={S.btnPrimary}>GET A QUOTE</button>
-      </div>
-    </nav>
+      )}
+
+      <style>{`
+        .desktop-nav { display: flex !important; }
+        .mobile-nav { display: none !important; }
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .mobile-nav { display: block !important; }
+        }
+      `}</style>
+    </>
   );
 }
+
 
 // ── Footer ─────────────────────────────────
 export function Footer({ nav }) {
