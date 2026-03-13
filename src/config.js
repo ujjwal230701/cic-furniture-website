@@ -15,7 +15,7 @@ export const STORE = {
   hours: "Monday – Saturday, 9:00 AM – 7:00 PM",
   gst: "PLWAJUH69O",
   upi: "9501798358@paytm",
-  whatsapp: "+91 9501798358",
+  whatsapp: "+919501798358",
 };
 
 export const CATEGORIES = ["All", "Chairs & Seating", "Desks & Tables", "Storage & Shelving", "Accessories & Misc"];
