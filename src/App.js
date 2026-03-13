@@ -5,6 +5,8 @@ import ProductsPage from "./pages/ProductsPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import ProductPage from "./pages/ProductPage";
+import { WhatsAppButton } from "./components";
+
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -29,6 +31,7 @@ export default function App() {
       <Navbar page={page} nav={nav} />
       {pages[page]?.()}
       <Footer nav={nav} />
+      <WhatsAppButton />
     </div>
   );
 }
